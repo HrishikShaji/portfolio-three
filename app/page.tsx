@@ -1,3 +1,9 @@
+import { Info } from "./components/Info";
+
 export default function Home() {
-  return <main></main>;
+  return (
+    <main className="w-full h-full p-10">
+      <Info />
+    </main>
+  );
 }

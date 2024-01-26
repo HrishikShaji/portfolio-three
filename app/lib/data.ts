@@ -5,6 +5,7 @@ export const data = {
     position: "Web Developer",
     address: "Tattoine,Outer Rim",
     phone: "1234567890",
+    email: "anakinskywalker@gmail.com",
   },
   navLinks: [
     { title: "Home", path: "#home" },
