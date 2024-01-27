@@ -49,7 +49,7 @@ export default function Home() {
           ))}
         </div>
       </div>
-      <div className="w-[50vw] h-[50vw]">{lookup[section]}</div>
+      <div className="w-[50vw] h-[70vh]">{lookup[section]}</div>
     </main>
   );
 }
