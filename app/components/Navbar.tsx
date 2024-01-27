@@ -2,55 +2,51 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Link from "next/link";
-import { useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 export const Navbar = () => {
-	const ref = useRef<HTMLAnchorElement>(null);
-	const overlay = useRef<HTMLDivElement>(null);
-	useGSAP(() => {
-		const button = document.querySelector(".button");
-		const tl = gsap.timeline();
+	const overlay = useRef();
 
-		if (ref.current) {
-			ref.current.addEventListener("mouseenter", () => {
-				gsap.fromTo(
-					overlay.current,
-					{
-						scaleX: 0,
-						transformOrigin: "left",
-					},
-					{
-						scaleX: 1,
-					},
-				);
+	const [isMounted, setIsMounted] = useState(false);
+
+	useEffect(() => {
+		setIsMounted(true);
+	}, []);
+
+	useLayoutEffect(() => {
+		if (isMounted) {
+			let ctx = gsap.context(() => {
+				gsap.set(overlay.current, { scaleX: 0 });
 			});
-			ref.current.addEventListener("mouseleave", () => {
-				gsap.fromTo(
-					overlay.current,
-					{
-						scaleX: 1,
-						transformOrigin: "right",
-					},
-					{
-						scaleX: 0,
-					},
-				);
-			});
+
+			return () => ctx.revert();
 		}
-	}, {});
+	}, [isMounted]);
 
+	const onMouseEnter = ({ currentTarget }) => {
+		let q = gsap.utils.selector(currentTarget);
+
+		gsap.to(q(".overlay"), { scaleX: 1, transformOrigin: "left" });
+	};
+
+	const onMouseLeave = ({ currentTarget }) => {
+		let q = gsap.utils.selector(currentTarget);
+
+		gsap.to(q(".overlay"), { scaleX: 0, transformOrigin: "right" });
+	};
 	return (
 		<div className="w-full bg-transparent p-10 items-center flex  justify-between">
 			<h1 className="text-3xl ">ANAKIN</h1>
 			<div className={`flex gap-3 items-center text-xl leading-none`}>
 				<Link
-					ref={ref}
+					onMouseEnter={onMouseEnter}
+					onMouseLeave={onMouseLeave}
 					className="button relative border-[2px] border-white py-1 px-2"
 					href="/projects"
 				>
 					<div
 						ref={overlay}
-						className="absolute left-0 top-0 w-full h-full bg-white"
+						className="overlay absolute left-0 top-0 w-full h-full bg-white"
 					/>
 					<h1 className="mix-blend-difference text-white">PROJECTS</h1>
 				</Link>
