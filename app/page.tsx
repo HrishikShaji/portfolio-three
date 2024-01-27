@@ -10,7 +10,7 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP);
 
-const lookup = {
+const lookup: Record<string, ReactNode> = {
 	about: <About />,
 	skills: <Skills />,
 	projects: <Projects />,
@@ -25,10 +25,30 @@ export default function Home() {
 			<div>
 				<Info />
 				<div className="flex text-3xl gap-3 text-red-500">
-					<button onClick={() => setSection("about")}>ABOUT</button>
-					<button onClick={() => setSection("skills")}>SKILLS</button>
-					<button onClick={() => setSection("projects")}>PROJECTS</button>
-					<button onClick={() => setSection("contact")}>CONTACT</button>
+					<button
+						className="focus:outline-none"
+						onClick={() => setSection("about")}
+					>
+						ABOUT
+					</button>
+					<button
+						className="focus:outline-none"
+						onClick={() => setSection("skills")}
+					>
+						SKILLS
+					</button>
+					<button
+						className="focus:outline-none"
+						onClick={() => setSection("projects")}
+					>
+						PROJECTS
+					</button>
+					<button
+						className="focus:outline-none"
+						onClick={() => setSection("contact")}
+					>
+						CONTACT
+					</button>
 				</div>
 			</div>
 			<div className="w-[50vw] h-[50vw]">{lookup[section]}</div>

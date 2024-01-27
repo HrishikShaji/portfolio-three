@@ -2,7 +2,7 @@ import { data } from "../lib/data";
 
 export const Skills = () => {
 	return (
-		<div className="w-full h-full flex flex-col p-10">
+		<div className="w-full h-full flex flex-col p-10 gap-10">
 			<h1 className="text-3xl text-red-500">SKILLS</h1>
 			<div className="grid grid-cols-4 gap-4">
 				{data.skills.data.map((item, i) => (
