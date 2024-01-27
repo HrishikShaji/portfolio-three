@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { useCursor } from "../hooks/useCursor";
 import { data } from "../lib/data";
+import Image from "next/image";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 export const Projects = () => {
-  const [index, setIndex] = useState(0);
   const length = data.projects.data.length;
+  const [index, setIndex] = useState(0);
+  const [prevIndex, setPrevIndex] = useState(length - 1);
+  const [nextIndex, setNextIndex] = useState(1);
 
   const prev = () => {
     if (index > 0) {
@@ -23,13 +28,50 @@ export const Projects = () => {
   };
   console.log(index, length);
 
+  useGSAP(
+    () => {
+      const element = document.getElementById(`image-${index}`);
+      const nextElement = document.getElementById(`image-${index + 1}`);
+      gsap.fromTo(
+        element,
+        {
+          xPercent: -100,
+        },
+        {
+          xPercent: 0,
+        },
+      );
+    },
+    { dependencies: [index] },
+  );
+
   const { setIsMouseEnter, setId } = useCursor();
   return (
     <div className="h-full w-full p-10  flex flex-col gap-10">
       <h1 className="text-3xl text-red-500">PROJECTS</h1>
-      <div className="h-full w-full flex flex-col gap-5">
-        <div className="bg-red-500 w-full h-full">
-          {data.projects.data[index].title}
+      <div className="h-full overflow-hidden w-full flex flex-col gap-5">
+        <div id={`image-${index}`} className=" flex bg-red-500 w-full h-[40vh]">
+          <Image
+            src={data.projects.data[prevIndex].img}
+            alt="image"
+            height={2000}
+            width={2000}
+            className="h-full w-full object-cover"
+          />
+          <Image
+            src={data.projects.data[index].img}
+            alt="image"
+            height={2000}
+            width={2000}
+            className="h-full w-full object-cover"
+          />
+          <Image
+            src={data.projects.data[nextIndex].img}
+            alt="image"
+            height={2000}
+            width={2000}
+            className="h-full w-full object-cover"
+          />
         </div>
         <div className="flex justify-between">
           <button
