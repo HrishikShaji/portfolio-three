@@ -76,9 +76,10 @@ export const Slider = ({ images }) => {
 
   return (
     <div className="carousel">
-      <div className="carousel-images">
+      <div className="relative rounded-[10px] h-[400px] max-w-[650px] m-auto overflow-hidden">
         <AnimatePresence>
           <motion.img
+            className="w-[99%] h-[99%] rounded-[8px] border-white"
             key={currentIndex}
             src={images[currentIndex].img}
             initial={direction === "right" ? "hiddenRight" : "hiddenLeft"}
@@ -87,11 +88,11 @@ export const Slider = ({ images }) => {
             variants={slideVariants}
           />
         </AnimatePresence>
-        <div className="slide_direction">
+        <div className=" flex justify-between">
           <motion.div
             variants={slidersVariants}
             whileHover="hover"
-            className="left"
+            className="left-0 absolute bg-neutral-500 p-3 rounded-full top-0 h-[25px] w-[25px]"
             onClick={handlePrevious}
           >
             <svg
@@ -106,7 +107,7 @@ export const Slider = ({ images }) => {
           <motion.div
             variants={slidersVariants}
             whileHover="hover"
-            className="right"
+            className="right-0 absolute bg-neutral-500 p-3 rounded-full top-0 h-[25px] w-[25px]"
             onClick={handleNext}
           >
             <svg
@@ -120,11 +121,13 @@ export const Slider = ({ images }) => {
           </motion.div>
         </div>
       </div>
-      <div className="carousel-indicator">
+      <div className="carousel-indicator mt-[20px] flex justify-center gap-[20px]">
         {images.map((_, index) => (
           <motion.div
             key={index}
-            className={`dot ${currentIndex === index ? "active" : ""}`}
+            className={`bg-red-500 w-[15px] h-[15px] rounded-full ${
+              currentIndex === index ? "bg-blue-500" : ""
+            }`}
             onClick={() => handleDotClick(index)}
             initial="initial"
             animate={currentIndex === index ? "animate" : ""}
