@@ -10,23 +10,28 @@ export const Projects = () => {
   const [index, setIndex] = useState(0);
   const [prevIndex, setPrevIndex] = useState(length - 1);
   const [nextIndex, setNextIndex] = useState(1);
-
+  const [direction, setDirection] = useState(0);
   const prev = () => {
-    if (index > 0) {
-      setIndex((prev) => prev - 1);
-    } else {
-      setIndex(length - 1);
-    }
+    setDirection(-100);
+    let prevIndexValue = index - 1 >= 0 ? index - 1 : length - 1; // Handle loop back to the last item
+    let prevPrevIndexValue =
+      prevIndexValue - 1 >= 0 ? prevIndexValue - 1 : length - 1; // Calculate previous previous index
+    setIndex(prevIndexValue);
+    setPrevIndex(prevPrevIndexValue);
+    setNextIndex(index);
   };
 
   const next = () => {
-    if (index < length - 1) {
-      setIndex((prev) => prev + 1);
-    } else {
-      setIndex(0);
-    }
+    setDirection(100);
+    let nextIndexValue = index + 1 < length ? index + 1 : 0; // Handle loop back to the first item
+    let nextNextIndexValue =
+      nextIndexValue + 1 < length ? nextIndexValue + 1 : 0; // Calculate next next index
+    setIndex(nextIndexValue);
+    setPrevIndex(index);
+    setNextIndex(nextNextIndexValue);
   };
-  console.log(index, length);
+
+  console.log(prevIndex, index, nextIndex, "length is", length);
 
   useGSAP(
     () => {
@@ -35,21 +40,21 @@ export const Projects = () => {
       gsap.fromTo(
         element,
         {
-          xPercent: -100,
+          xPercent: direction,
         },
         {
           xPercent: 0,
         },
       );
     },
-    { dependencies: [index] },
+    { dependencies: [index, direction] },
   );
 
   const { setIsMouseEnter, setId } = useCursor();
   return (
     <div className="h-full w-full p-10  flex flex-col gap-10">
       <h1 className="text-3xl text-red-500">PROJECTS</h1>
-      <div className="h-full overflow-hidden w-full flex flex-col gap-5">
+      <div className="h-full  w-full flex flex-col gap-5">
         <div id={`image-${index}`} className=" flex bg-red-500 w-full h-[40vh]">
           <Image
             src={data.projects.data[prevIndex].img}
