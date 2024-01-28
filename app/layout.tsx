@@ -3,6 +3,10 @@ import { Inter, Teko } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "./components/Navbar";
 import { CustomCursor } from "./components/CustomCursor";
+import { Cursor } from "./components/Cursor";
+import CursorContextProvider, {
+	CursorContext,
+} from "./providers/CursorContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,8 +32,9 @@ export default function RootLayout({
 			<body
 				className={`w-full h-full bg-neutral-800 text-white ${tekoInit.className}`}
 			>
-				<CustomCursor />
-				<Navbar />
+				<CursorContextProvider>
+					<Navbar />
+				</CursorContextProvider>
 
 				{children}
 			</body>

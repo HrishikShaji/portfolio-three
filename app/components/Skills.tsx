@@ -19,7 +19,7 @@ export const Skills = () => {
               setId("");
             }}
             key={i}
-            className="hover-text flex flex-col gap-1 p-2  mix-blend-difference"
+            className="hover-text bg-red-500 flex flex-col gap-1 p-2 text-black  "
           >
             <h1>{item}</h1>
           </div>
