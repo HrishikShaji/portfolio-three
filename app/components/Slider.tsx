@@ -18,25 +18,34 @@ export const Slider: React.FC<SliderProps> = ({ images }) => {
 			x: "-100%",
 			opacity: 0,
 		},
-		visible: {
+		visibleRight: {
 			x: "0",
 			opacity: 1,
+			transition: {
+				delay: 1,
+				duration: 1,
+			},
+		},
+		visibleLeft: {
+			x: "-0",
+			opacity: 1,
+			transition: {
+				delay: 1,
+				duration: 1,
+			},
+		},
+
+		exitRight: {
+			x: "-100%",
 			transition: {
 				duration: 1,
 			},
 		},
-		exit: {
-			opacity: 0,
-			scale: 0.8,
+		exitLeft: {
+			x: "100%",
 			transition: {
-				duration: 0.5,
+				duration: 1,
 			},
-		},
-	};
-	const slidersVariants = {
-		hover: {
-			scale: 1.2,
-			backgroundColor: "#ff00008e",
 		},
 	};
 	const dotsVariants = {
@@ -76,15 +85,15 @@ export const Slider: React.FC<SliderProps> = ({ images }) => {
 
 	return (
 		<div className="carousel flex flex-col gap-5">
-			<div className="relative bg-green-500  h-[40vh] w-full  overflow-hidden">
+			<div className="relative   h-[40vh] w-full  overflow-hidden">
 				<AnimatePresence>
 					<motion.img
 						className="w-full h-full object-cover"
 						key={currentIndex}
 						src={images[currentIndex].img}
 						initial={direction === "right" ? "hiddenRight" : "hiddenLeft"}
-						animate="visible"
-						exit="exit"
+						animate={direction === "right" ? "visibleRight" : "visibleLeft"}
+						exit={direction === "right" ? "exitRight" : "exitLeft"}
 						variants={slideVariants}
 					/>
 				</AnimatePresence>
