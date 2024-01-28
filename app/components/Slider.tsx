@@ -11,24 +11,28 @@ export const Slider: React.FC<SliderProps> = ({ images }) => {
 
 	const slideVariants = {
 		hiddenRight: {
-			x: "100%",
+			scaleX: "0%",
+			originX: 0,
 			opacity: 0,
 		},
 		hiddenLeft: {
-			x: "-100%",
+			scaleX: "0%",
+			originX: 1,
 			opacity: 0,
 		},
 		visibleRight: {
-			x: "0",
+			scaleX: "100%",
 			opacity: 1,
+			originX: 0,
 			transition: {
 				delay: 1,
 				duration: 1,
 			},
 		},
 		visibleLeft: {
-			x: "-0",
+			scaleX: "100%",
 			opacity: 1,
+			originX: 1,
 			transition: {
 				delay: 1,
 				duration: 1,
@@ -36,13 +40,13 @@ export const Slider: React.FC<SliderProps> = ({ images }) => {
 		},
 
 		exitRight: {
-			x: "-100%",
+			x: "100%",
 			transition: {
 				duration: 1,
 			},
 		},
 		exitLeft: {
-			x: "100%",
+			x: "-100%",
 			transition: {
 				duration: 1,
 			},
