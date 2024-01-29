@@ -11,57 +11,68 @@ import { useCursorHandlers } from "./hooks/useCursorHandlers";
 import { TitleSection } from "./components/TitleSection";
 import { Navbar } from "./components/Navbar";
 import { AboutDescSection } from "./components/AboutDescSection";
+import { SkillsDescSection } from "./components/SkillDescSection";
 
 gsap.registerPlugin(useGSAP);
 
-const buttons = ["about", "skills", "projects", "contact"];
+const buttons = [
+	{ name: "about", desc: "I JUST LOVE CODING." },
+	{ name: "skills", desc: "I'M PRETTY GOOD AT THIS." },
+	{ name: "projects", desc: "I'M PROUD OF THESE..." },
+	{ name: "contact", desc: "GIVE ME A CALL." },
+];
 
 const lookup: Record<string, ReactNode> = {
-  about: <About />,
-  skills: <Skills />,
-  projects: <Projects />,
-  contact: <Contact />,
+	about: <About />,
+	skills: <Skills />,
+	projects: <Projects />,
+	contact: <Contact />,
+};
+
+const descLookup: Record<string, ReactNode> = {
+	about: <AboutDescSection />,
+	skills: <SkillsDescSection />,
 };
 
 export default function Home() {
-  const [section, setSection] = useState("about");
-  const [title, setTitle] = useState("ABOUT");
-  const [data, setData] = useState<Record<string, any>>({});
+	const [section, setSection] = useState("about");
+	const [title, setTitle] = useState(buttons[0].desc);
+	const [data, setData] = useState<Record<string, any>>({});
 
-  const { buttonMouseEnter, buttonMouseLeave } = useCursorHandlers();
-  return (
-    <main className="w-full h-full px-10  flex flex-col ">
-      <Navbar />
-      <div className="flex justify-between gap-10 w-full ">
-        <div className="flex flex-col gap-10 w-full">
-          <Info />
-          <TitleSection title={title} />
-        </div>
-        <div className="flex flex-col ">
-          <div className="hover-container flex text-5xl gap-3 text-red-500">
-            {buttons.map((item) => (
-              <button
-                key={item}
-                id={`${item}-button`}
-                onMouseEnter={() => buttonMouseEnter({ id: `${item}-button` })}
-                onMouseLeave={buttonMouseLeave}
-                className={`   p-2 focus:outline-none mix-blend-difference hover:bg-red-500 hover:text-black ${
-                  section === item ? "text-black bg-red-500" : ""
-                }`}
-                onClick={() => {
-                  setSection(item);
-                  setTitle(item);
-                  setData({ title: item });
-                }}
-              >
-                {item.toUpperCase()}
-              </button>
-            ))}
-          </div>
-          <div className="w-[50vw] h-[50vh]">{lookup[section]}</div>
-        </div>
-      </div>
-      <AboutDescSection data={data} />
-    </main>
-  );
+	const { buttonMouseEnter, buttonMouseLeave } = useCursorHandlers();
+	return (
+		<main className="w-full h-full px-10  flex flex-col ">
+			<Navbar />
+			<div className="flex justify-between gap-10 w-full ">
+				<div className="flex flex-col gap-10 w-full">
+					<Info />
+					<TitleSection title={title} />
+				</div>
+				<div className="flex flex-col ">
+					<div className="hover-container flex text-5xl gap-3 text-red-500">
+						{buttons.map((item) => (
+							<button
+								key={item.name}
+								id={`${item.name}-button`}
+								onMouseEnter={() =>
+									buttonMouseEnter({ id: `${item.name}-button` })
+								}
+								onMouseLeave={buttonMouseLeave}
+								className={`   p-2 focus:outline-none mix-blend-difference hover:bg-red-500 hover:text-black ${section === item.name ? "text-black bg-red-500" : ""
+									}`}
+								onClick={() => {
+									setSection(item.name);
+									setTitle(item.desc);
+								}}
+							>
+								{item.name.toUpperCase()}
+							</button>
+						))}
+					</div>
+					<div className="w-[50vw] h-[50vh]">{lookup[section]}</div>
+				</div>
+			</div>
+			{descLookup[section]}
+		</main>
+	);
 }

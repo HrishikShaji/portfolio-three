@@ -147,7 +147,6 @@ export const data = {
       "TAILWIND CSS",
       "GSAP",
       "FRAMER MOTION",
-      "PRISMA",
       "MONGODB",
       "POSTGRE SQL",
       "FIREBASE",
