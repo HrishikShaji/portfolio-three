@@ -1,3 +1,5 @@
+import { AnimatePresence, motion } from "framer-motion";
+
 interface AboutDescSectionProps {
   data: Record<string, any>;
 }
@@ -9,13 +11,7 @@ const areas = [
   "ARTIFICIAL INTELLIGENCE",
 ];
 
-const features = [
-  "CLEAN CODE",
-  "REUSABILITY",
-  "RESPONSIVE",
-  "COMBATIBLITY",
-  "EFFICIENCY",
-];
+const features = ["CLEAN CODE", "REUSABILITY", "RESPONSIVE", "EFFICIENCY"];
 
 export const AboutDescSection: React.FC<AboutDescSectionProps> = ({ data }) => {
   return (
@@ -24,10 +20,15 @@ export const AboutDescSection: React.FC<AboutDescSectionProps> = ({ data }) => {
         <div className="h-[50px] w-[30%] text-center flex items-center px-2 text-3xl text-white">
           {`My Area of Expertise includes    -`}
         </div>
-        <div className="flex w-full gap-20">
+        <div className="grid grid-cols-4 gap-4 w-full ">
           {areas.map((item, i) => (
-            <div key={i} className="flex gap-2  items-center">
-              <div className="w-4 h-[50px] bg-red-500" />
+            <div key={i} className="flex gap-2 relative   items-center">
+              <motion.div
+                initial={{ scaleX: 0.1, originX: "left" }}
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 1 }}
+                className="w-full h-[50px] -left-8 bg-red-500 absolute mix-blend-difference"
+              />
               <h1 className="text-2xl leading-tight">{item}</h1>
             </div>
           ))}
@@ -37,10 +38,15 @@ export const AboutDescSection: React.FC<AboutDescSectionProps> = ({ data }) => {
         <div className="h-[50px] w-[30%] text-center flex items-center px-2 text-3xl text-white">
           {`I'm Mostly Known For    -`}
         </div>
-        <div className="flex w-full gap-20">
+        <div className="grid grid-cols-4 gap-4 w-full">
           {features.map((item, i) => (
-            <div key={i} className="flex gap-2  items-center">
-              <div className="w-4 h-[50px] bg-red-500" />
+            <div key={i} className="flex gap-2 relative   items-center">
+              <motion.div
+                initial={{ scaleX: 0.1, originX: "left" }}
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 1 }}
+                className="w-full h-[50px] -left-8 bg-red-500 absolute mix-blend-difference"
+              />
               <h1 className="text-2xl leading-tight">{item}</h1>
             </div>
           ))}
