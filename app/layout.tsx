@@ -35,9 +35,8 @@ export default function RootLayout({
         <CursorContextProvider>
           <Cursor />
           <Navbar />
+          {children}
         </CursorContextProvider>
-
-        {children}
       </body>
     </html>
   );

@@ -26,7 +26,7 @@ export const Cursor = () => {
           position: "absolute",
           left: clientX,
           top: clientY,
-          transform: `translate(-50%, -50%) scale(${cursor.active ? 2.5 : 1})`,
+          transform: `translate(-50%, -50%) scale(${cursor.scale})`,
           stroke: cursor.color,
           strokeWidth: 1,
           fill: cursor.active ? "rgba(255,255,255,.5)" : "black",

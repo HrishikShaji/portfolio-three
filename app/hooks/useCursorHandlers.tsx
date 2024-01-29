@@ -3,20 +3,61 @@ import { CursorContext } from "../providers/CursorContext";
 
 export const useCursorHandlers = () => {
   const { setCursor } = useContext(CursorContext);
-  const onMouseEnter = () => {
+  const buttonMouseEnter = () => {
     setCursor((prev) => ({
       ...prev,
       active: true,
       color: "red",
+      scale: 2,
     }));
   };
-  const onMouseLeave = () => {
+  const buttonMouseLeave = () => {
     setCursor((prev) => ({
       ...prev,
-      active: true,
+      active: false,
+      scale: 1,
       color: "blue",
     }));
   };
 
-  return { onMouseEnter, onMouseLeave };
+  const descMouseEnter = () => {
+    setCursor((prev) => ({
+      ...prev,
+      active: true,
+      color: "green",
+      scale: 5,
+    }));
+  };
+  const descMouseLeave = () => {
+    setCursor((prev) => ({
+      ...prev,
+      active: false,
+      scale: 1,
+      color: "blue",
+    }));
+  };
+  const logoMouseEnter = () => {
+    setCursor((prev) => ({
+      ...prev,
+      active: true,
+      color: "yellow",
+      scale: 5,
+    }));
+  };
+  const logoMouseLeave = () => {
+    setCursor((prev) => ({
+      ...prev,
+      active: false,
+      scale: 1,
+      color: "blue",
+    }));
+  };
+  return {
+    buttonMouseEnter,
+    buttonMouseLeave,
+    descMouseEnter,
+    descMouseLeave,
+    logoMouseLeave,
+    logoMouseEnter,
+  };
 };

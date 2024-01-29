@@ -1,19 +1,30 @@
 "use client";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 import Link from "next/link";
 import { useCursorHandlers } from "../hooks/useCursorHandlers";
 
 export const Navbar = () => {
-  const { onMouseEnter, onMouseLeave } = useCursorHandlers();
+  const {
+    buttonMouseLeave,
+    descMouseEnter,
+    descMouseLeave,
+    buttonMouseEnter,
+    logoMouseEnter,
+    logoMouseLeave,
+  } = useCursorHandlers();
 
   return (
     <div className="w-full bg-transparent p-10 items-center flex  justify-between">
-      <h1 className="text-5xl ">ANAKIN</h1>
+      <h1
+        className="text-5xl "
+        onMouseEnter={logoMouseEnter}
+        onMouseLeave={logoMouseLeave}
+      >
+        ANAKIN
+      </h1>
       <div className={`flex gap-3 items-center text-xl leading-none`}>
         <Link
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
+          onMouseEnter={buttonMouseEnter}
+          onMouseLeave={buttonMouseLeave}
           className="button relative border-[2px] border-white py-1 px-2"
           href="/projects"
         >
@@ -21,7 +32,12 @@ export const Navbar = () => {
           <h1 className="mix-blend-difference text-white">PROJECTS</h1>
         </Link>
 
-        <Link className="border-[2px] border-white py-1 px-2" href="/about">
+        <Link
+          onMouseEnter={descMouseEnter}
+          onMouseLeave={descMouseLeave}
+          className="border-[2px] border-white py-1 px-2"
+          href="/about"
+        >
           ABOUT
         </Link>
       </div>
