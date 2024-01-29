@@ -2,26 +2,18 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Link from "next/link";
-import {
-  useCallback,
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
-import { CursorContext } from "../providers/CursorContext";
 import { useCursorHandlers } from "../hooks/useCursorHandlers";
 
 export const Navbar = () => {
-  const cursorHandlers = useCursorHandlers();
+  const { onMouseEnter, onMouseLeave } = useCursorHandlers();
 
   return (
     <div className="w-full bg-transparent p-10 items-center flex  justify-between">
       <h1 className="text-5xl ">ANAKIN</h1>
       <div className={`flex gap-3 items-center text-xl leading-none`}>
         <Link
-          {...cursorHandlers}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
           className="button relative border-[2px] border-white py-1 px-2"
           href="/projects"
         >

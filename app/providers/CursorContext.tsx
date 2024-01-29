@@ -1,19 +1,31 @@
 "use client";
 import React, { ReactNode, createContext, useState } from "react";
-import { Cursor } from "../components/Cursor";
 
-export const CursorContext = createContext<any>(null);
+export interface CursorData {
+  active: boolean;
+  color: string;
+}
+
+export const CursorContext = createContext<{
+  cursor: CursorData;
+  setCursor: React.Dispatch<React.SetStateAction<CursorData>>;
+}>({
+  cursor: { active: false, color: "black" },
+  setCursor: () => {},
+});
 
 interface CursorContextProps {
   children: ReactNode;
 }
 
 const CursorContextProvider = ({ children }: CursorContextProps) => {
-  const [cursor, setCursor] = useState({ active: false });
+  const [cursor, setCursor] = useState<CursorData>({
+    active: false,
+    color: "black",
+  });
 
   return (
-    <CursorContext.Provider value={{ cursor: cursor, setCursor: setCursor }}>
-      <Cursor />
+    <CursorContext.Provider value={{ cursor, setCursor }}>
       {children}
     </CursorContext.Provider>
   );
