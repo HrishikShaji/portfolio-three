@@ -2,6 +2,50 @@ interface AboutDescSectionProps {
   data: Record<string, any>;
 }
 
+const areas = [
+  "UI/UX",
+  "FULL STACK WEB DEVELOPMENT",
+  "BLOCKCHAIN",
+  "ARTIFICIAL INTELLIGENCE",
+];
+
+const features = [
+  "CLEAN CODE",
+  "REUSABILITY",
+  "RESPONSIVE",
+  "COMBATIBLITY",
+  "EFFICIENCY",
+];
+
 export const AboutDescSection: React.FC<AboutDescSectionProps> = ({ data }) => {
-  return <div className="w-full flex-grow  bg-red-500">{data.title}</div>;
+  return (
+    <div className="w-full flex-grow   flex flex-col justify-between items-start">
+      <div className="flex  justify-between w-full items-center">
+        <div className="h-[50px] w-[30%] text-center flex items-center px-2 text-3xl text-white">
+          {`My Area of Expertise includes    -`}
+        </div>
+        <div className="flex w-full gap-20">
+          {areas.map((item, i) => (
+            <div key={i} className="flex gap-2  items-center">
+              <div className="w-4 h-[50px] bg-red-500" />
+              <h1 className="text-2xl leading-tight">{item}</h1>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="flex  items-center justify-between w-full">
+        <div className="h-[50px] w-[30%] text-center flex items-center px-2 text-3xl text-white">
+          {`I'm Mostly Known For    -`}
+        </div>
+        <div className="flex w-full gap-20">
+          {features.map((item, i) => (
+            <div key={i} className="flex gap-2  items-center">
+              <div className="w-4 h-[50px] bg-red-500" />
+              <h1 className="text-2xl leading-tight">{item}</h1>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 };
