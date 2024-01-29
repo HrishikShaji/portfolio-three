@@ -7,7 +7,6 @@ import { Projects } from "./components/Projects";
 import { Contact } from "./components/Contact";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useCursor } from "./hooks/useCursor";
 import { useCursorHandlers } from "./hooks/useCursorHandlers";
 
 gsap.registerPlugin(useGSAP);
@@ -23,7 +22,6 @@ const lookup: Record<string, ReactNode> = {
 
 export default function Home() {
   const [section, setSection] = useState("about");
-  const { setIsMouseEnter, setId } = useCursor();
 
   const { buttonMouseEnter, buttonMouseLeave } = useCursorHandlers();
   return (
@@ -35,7 +33,7 @@ export default function Home() {
             <button
               key={item}
               id={`${item}-button`}
-              onMouseEnter={buttonMouseEnter}
+              onMouseEnter={() => buttonMouseEnter({ id: `${item}-button` })}
               onMouseLeave={buttonMouseLeave}
               className="hover-text   p-2 focus:outline-none mix-blend-difference hover:bg-red-500 hover:text-black"
               onClick={() => setSection(item)}
@@ -52,24 +50,24 @@ export default function Home() {
 
 {
   /*   old animation
-
-
-						<button
-							key={item}
-							id={`${item}-button`}
-							onMouseEnter={() => {
-								setIsMouseEnter(true);
-								setId(`${item}-button`);
-							}}
-							onMouseLeave={() => {
-								setIsMouseEnter(false);
-								setId("");
-							}}
-							className="hover-text   p-2 focus:outline-none mix-blend-difference hover:bg-red-500 hover:text-black"
-							onClick={() => setSection(item)}
-						>
-							{item.toUpperCase()}
-						</button>
-
-*/
+			      
+			      
+									      <button
+										      key={item}
+										      id={`${item}-button`}
+										      onMouseEnter={() => {
+											      setIsMouseEnter(true);
+											      setId(`${item}-button`);
+										      }}
+										      onMouseLeave={() => {
+											      setIsMouseEnter(false);
+											      setId("");
+										      }}
+										      className="hover-text   p-2 focus:outline-none mix-blend-difference hover:bg-red-500 hover:text-black"
+										      onClick={() => setSection(item)}
+									      >
+										      {item.toUpperCase()}
+									      </button>
+			      
+			      */
 }
