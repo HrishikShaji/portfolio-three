@@ -30,7 +30,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`w-full h-full bg-neutral-800 text-white ${tekoInit.className}`}
+				className={`w-full h-screen bg-neutral-800 text-white ${tekoInit.className}`}
 			>
 				<CursorContextProvider>
 					<Cursor />

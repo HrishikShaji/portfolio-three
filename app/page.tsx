@@ -8,6 +8,7 @@ import { Contact } from "./components/Contact";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useCursorHandlers } from "./hooks/useCursorHandlers";
+import { TitleSection } from "./components/TitleSection";
 
 gsap.registerPlugin(useGSAP);
 
@@ -22,28 +23,38 @@ const lookup: Record<string, ReactNode> = {
 
 export default function Home() {
 	const [section, setSection] = useState("about");
+	const [title, setTitle] = useState("ABOUT");
 
 	const { buttonMouseEnter, buttonMouseLeave } = useCursorHandlers();
 	return (
-		<main className="w-full h-full p-10 flex gap-10 justify-between">
-			<div className="flex flex-col gap-20">
-				<Info />
-				<div className="hover-container flex text-3xl gap-3 text-red-500">
-					{buttons.map((item) => (
-						<button
-							key={item}
-							id={`${item}-button`}
-							onMouseEnter={() => buttonMouseEnter({ id: `${item}-button` })}
-							onMouseLeave={buttonMouseLeave}
-							className="   p-2 focus:outline-none mix-blend-difference hover:bg-red-500 hover:text-black"
-							onClick={() => setSection(item)}
-						>
-							{item.toUpperCase()}
-						</button>
-					))}
+		<main className="w-full px-10 flex-col  items-stretch">
+			<div className="flex justify-between gap-10 w-full ">
+				<div className="flex flex-col gap-10 w-full">
+					<Info />
+					<TitleSection title={title} />
+				</div>
+				<div className="flex flex-col ">
+					<div className="hover-container flex text-5xl gap-3 text-red-500">
+						{buttons.map((item) => (
+							<button
+								key={item}
+								id={`${item}-button`}
+								onMouseEnter={() => buttonMouseEnter({ id: `${item}-button` })}
+								onMouseLeave={buttonMouseLeave}
+								className={`   p-2 focus:outline-none mix-blend-difference hover:bg-red-500 hover:text-black ${section === item ? "text-black bg-red-500" : ""
+									}`}
+								onClick={() => {
+									setSection(item);
+									setTitle(item);
+								}}
+							>
+								{item.toUpperCase()}
+							</button>
+						))}
+					</div>
+					<div className="w-[50vw] h-[50vh]">{lookup[section]}</div>
 				</div>
 			</div>
-			<div className="w-[50vw] h-[70vh]">{lookup[section]}</div>
 		</main>
 	);
 }

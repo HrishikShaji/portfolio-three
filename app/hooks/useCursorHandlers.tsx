@@ -9,7 +9,6 @@ export const useCursorHandlers = () => {
 		const rect = hoverElement?.getBoundingClientRect();
 
 		if (rect && hoverElement) {
-			console.log("mouse entered");
 			setCursor((prev) => ({
 				...prev,
 				active: true,
@@ -24,7 +23,6 @@ export const useCursorHandlers = () => {
 		}
 	};
 	const buttonMouseLeave = () => {
-		console.log("mouse left");
 		setCursor((prev) => ({
 			...prev,
 			active: false,
@@ -59,7 +57,6 @@ export const useCursorHandlers = () => {
 		const rect = hoverElement?.getBoundingClientRect();
 
 		if (rect && hoverElement) {
-			console.log("mouse entered");
 			setCursor((prev) => ({
 				...prev,
 				active: true,
