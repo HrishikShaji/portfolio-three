@@ -11,19 +11,17 @@ import {
   useState,
 } from "react";
 import { CursorContext } from "../providers/CursorContext";
+import { useCursorHandlers } from "../hooks/useCursorHandlers";
 
 export const Navbar = () => {
-  const [, setCursor] = useContext(CursorContext);
-  const toggleCursor = useCallback(() => {
-    setCursor(({ active }) => ({ active: !active }));
-  });
+  const cursorHandlers = useCursorHandlers();
+
   return (
     <div className="w-full bg-transparent p-10 items-center flex  justify-between">
       <h1 className="text-5xl ">ANAKIN</h1>
       <div className={`flex gap-3 items-center text-xl leading-none`}>
         <Link
-          onMouseEnter={toggleCursor}
-          onMouseLeave={toggleCursor}
+          {...cursorHandlers}
           className="button relative border-[2px] border-white py-1 px-2"
           href="/projects"
         >
