@@ -37,12 +37,11 @@ export const Slider: React.FC<SliderProps> = ({ projects, setProject }) => {
 
   const dotsVariants = {
     initial: {
-      y: 0,
+      width: 10,
     },
     animate: {
-      y: -10,
-      scale: 1.2,
-      transition: { type: "spring", stiffness: 1000, damping: "10" },
+      width: 30,
+      transition: { stiffness: 1000, damping: "10" },
     },
     hover: {
       scale: 1.1,
@@ -137,11 +136,11 @@ export const Slider: React.FC<SliderProps> = ({ projects, setProject }) => {
       </div>
       <div className=" flex text-2xl justify-between items-center text-red-500 ">
         <motion.button onClick={handlePrevious}>PREV</motion.button>
-        <div className="carousel-indicator  flex justify-center gap-[20px]">
+        <div className="carousel-indicator  flex  gap-[10px]">
           {projects.map((_, index) => (
             <motion.div
               key={index}
-              className={` cursor-pointer w-[30px] h-[5px]  ${
+              className={` cursor-pointer w-[10px] h-[5px]  ${
                 currentIndex === index ? "bg-red-500" : "bg-neutral-500"
               }`}
               onClick={() => handleDotClick(index)}
