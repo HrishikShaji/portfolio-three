@@ -12,7 +12,6 @@ const useMousePosition = () => {
 
 	const updatePosition = (event: MouseEvent) => {
 		const { pageX, pageY, clientX, clientY } = event;
-		console.log(cursor, position);
 		setPosition({
 			clientX,
 			clientY,
